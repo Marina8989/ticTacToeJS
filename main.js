@@ -1,6 +1,8 @@
 let cells = document.querySelectorAll('[data-cell]');
-let messageGameText = document.querySelector('.gameText');
+let messageGameText = document.querySelector('.messageText');
 const restartBtn = document.querySelector('#restartBtn');
+const board = document.querySelector('.board');
+const messageText = document.querySelector('.gameText');
 
 let playerTurn;
 const X_PLAYER = 'x';
@@ -10,13 +12,13 @@ const winningCombo = [
     [3,4,5],
     [6,7,8],
     [0,3,6],
+    [1,4,7],
     [2,5,8],
     [0,4,8],
     [2,4,6],
-    [1,4,7]
 ]
 
-startGame()
+startGame();
 
 restartBtn.addEventListener('click', startGame);
 
@@ -33,11 +35,10 @@ function startGame() {
 } 
 
 
-
 function handleClass(e) {
     const item = e.target;
     let currentClass = playerTurn ? CIRCLE_PLAYER : X_PLAYER;
-    
+
     placeMark(item, currentClass);
 
     if(checkWin(currentClass)) {
@@ -47,17 +48,14 @@ function handleClass(e) {
     }else {
         swapTurns();
     }
-
 }
 
-
 //game over message id someone one 
-
 function gameOver(draw) {
     if(draw) {
-     winningCombo.innerText = 'Draw';
+     messageText.innerText = 'Draw';
     }else{
-        winningCombo.innerText = `${playerTurn ? "O's" : "X's"} Wins!`;
+     messageText.innerText = `${playerTurn ? "O's" : "X's"} Wins!`;
     }
     messageGameText.classList.add('show')
 }
